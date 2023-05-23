@@ -24,7 +24,7 @@ public class Dictionary
 
     public override string ToString()
     {
-        return string.Join(", ", _set.OrderBy(t => t.Length).Take(100));
+        return string.Join(", ", _set.Take(100));
     }
 
     public ISet<string> Set => _set;
