@@ -6,6 +6,10 @@ namespace InfoSearch.Parsing;
 
 public class PdfParser : IParser
 {
+    public ParserType Type => ParserType.PDF;
+
+    public string SearchPattern => "*.pdf";
+
     public string Parse(string filename)
     {
         PdfReader reader = new PdfReader(filename);

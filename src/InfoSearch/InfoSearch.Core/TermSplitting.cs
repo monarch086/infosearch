@@ -13,7 +13,7 @@ public static class TermSplitting
         return document.Split(delimiters)
             .Select(s => s.Trim(trimChars))
             .Select(s => s.Trim())
-            .Where(s => !Regex.Match(s, @"\d+").Success)
+            .Where(s => !Regex.Match(s, @"[^\p{L}]").Success) // Exclude terms with non-letter chars
             .Select(s => s.ToLower())
             .Where(s => s.Length > 1)
             .ToArray();

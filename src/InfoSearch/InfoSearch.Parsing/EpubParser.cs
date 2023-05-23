@@ -7,6 +7,10 @@ namespace InfoSearch.Parsing;
 
 public class EpubParser : IParser
 {
+    public ParserType Type => ParserType.EPUB;
+
+    public string SearchPattern => "*.epub";
+
     public string Parse(string filename)
     {
         EpubBook book = EpubReader.ReadBook(filename);

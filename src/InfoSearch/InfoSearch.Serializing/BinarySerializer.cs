@@ -1,22 +1,21 @@
 ﻿using InfoSearch.Core;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using MessagePack;
 
 namespace InfoSearch.Serializing;
 
 public class BinarySerializer : ISerializer
 {
+    public SerializerType Type => SerializerType.Binary;
+
+    public string FileExtension => "bin";
+
     public void Serialize(ISet<string> set, string filename)
     {
-        var ms = File.OpenWrite(filename);
-        //Format the object as Binary  
-
-        var formatter = new BinaryFormatter();
-
-        //formatter.Serialize(ms, set);
-        ms.Flush();
-        ms.Close();
-        ms.Dispose();
+        using (var stream = File.OpenWrite(filename))
+        {
+            MessagePackSerializer.Serialize(stream, set);
+            stream.Flush();
+        }
     }
 }
 
