@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InfoSearch.App": {
+      "commandName": "Project",
+      "commandLineArgs": "-t PDF -d C:\\Users\\Oleksandr_Barsuk\\Downloads\\pdf"
+    }
+  }
+}
