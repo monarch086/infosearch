@@ -1,5 +1,5 @@
-﻿using Binaron.Serializer;
-using InfoSearch.Core;
+﻿using InfoSearch.Core;
+using MessagePack;
 
 namespace InfoSearch.Serializing;
 
@@ -13,7 +13,7 @@ public class BinarySerializer : ISerializer
     {
         using (var stream = File.OpenWrite(filename))
         {
-            BinaronConvert.Serialize(set, stream);
+            MessagePackSerializer.Serialize(stream, set);
             stream.Flush();
         }
     }
