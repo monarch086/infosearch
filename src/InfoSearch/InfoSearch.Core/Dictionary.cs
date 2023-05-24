@@ -24,7 +24,9 @@ public class Dictionary
 
     public override string ToString()
     {
-        return string.Join(", ", _set.Take(100));
+        var limit = 100;
+
+        return $"Dictionary top {limit} words: " + string.Join(", ", _set.Take(limit));
     }
 
     public ISet<string> Set => _set;

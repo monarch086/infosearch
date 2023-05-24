@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Binaron.Serializer" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InfoSearch.Core\InfoSearch.Core.csproj" />
   </ItemGroup>
 

@@ -4,11 +4,11 @@ namespace InfoSearch.Parsing;
 
 public class ParserResolver
 {
-    private readonly ISet<IParser> parsers;
+    private readonly IList<IParser> parsers;
 
     public ParserResolver()
     {
-        parsers = new HashSet<IParser>
+        parsers = new List<IParser>
         {
             new PdfParser(),
             new EpubParser()

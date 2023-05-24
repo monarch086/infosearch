@@ -15,7 +15,9 @@ internal static class ArgsParser
                 { "d|directory=",
                    "the directory to scan for the documents.\n" +
                       "this must be an integer.",
-                    (string v) => options.WorkingDirectory = v }
+                    (string v) => options.WorkingDirectory = v },
+                { "s|serializer=", "the type of serializer.",
+                   (SerializerType v) => options.SerializerType = v },
             };
 
         List<string> extra;

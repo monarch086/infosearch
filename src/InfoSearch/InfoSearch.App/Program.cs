@@ -6,6 +6,7 @@ using InfoSearch.Serializing;
 public class Program
 {
     private static ParserResolver parserResolver = new ParserResolver();
+    private static SerializerResolver serializerResolver = new SerializerResolver();
 
     public static void Main(string[] args)
     {
@@ -31,9 +32,12 @@ public class Program
         Console.WriteLine($"Dictionary length: {dictionary.Set.Count()}");
 
         var currentTime = DateTime.Now;
-        var filename = $"{options.WorkingDirectory}\\{currentTime.ToString("yyyy-MM-dd-HH-mm-ss")}_dictionary.txt";
+        var serializationTypeName = options.SerializerType.ToString().ToLower();
+        var serializer = serializerResolver.Resolve(options.SerializerType);
+        var filename = $"{options.WorkingDirectory}\\{currentTime.ToString("yyyy-MM-dd-HH-mm-ss")}" +
+            $"_dictionary_{serializationTypeName}.{serializer.FileExtension}";
 
-        dictionary.Save(new TextSerializer(), filename);
+        dictionary.Save(serializer, filename);
 
         Console.WriteLine("Done...");
     }
