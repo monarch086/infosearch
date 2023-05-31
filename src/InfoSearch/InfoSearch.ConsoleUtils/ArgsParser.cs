@@ -1,9 +1,9 @@
 ﻿using InfoSearch.Core;
 using Mono.Options;
 
-namespace InfoSearch.App;
+namespace InfoSearch.ConsoleUtils;
 
-internal static class ArgsParser
+public static class ArgsParser
 {
     public static ConsoleOptions Parse(string[] args)
     {
@@ -15,7 +15,7 @@ internal static class ArgsParser
                 { "d|directory=",
                    "the directory to scan for the documents.\n" +
                       "this must be an integer.",
-                    (string v) => options.WorkingDirectory = v },
+                    (v) => options.WorkingDirectory = v },
                 { "s|serializer=", "the type of serializer.",
                    (SerializerType v) => options.SerializerType = v },
             };

@@ -1,9 +1,9 @@
 ﻿using InfoSearch.Core;
 using System.Reflection;
 
-namespace InfoSearch.App;
+namespace InfoSearch.ConsoleUtils;
 
-internal class ConsoleOptions
+public class ConsoleOptions
 {
     public ParserType Type { get; set; } = ParserType.EPUB;
 
