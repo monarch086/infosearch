@@ -9,7 +9,7 @@ App creates set of unique words out of provided PDF or EPUB documents.
 Run example:
 
 ````sh
-cd src\InfoSearch\InfoSearch.App\bin\Debug\net7.0
+cd src\InfoSearch\Executable\InfoSearch.DictionaryApp\bin\Debug\net7.0
 InfoSearch.DictionaryApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub -s json
 ````
 
@@ -24,7 +24,7 @@ InfoSearch.DictionaryApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub -s 
 Run example:
 
 ````sh
-cd src\InfoSearch\InfoSearch.IndexApp\bin\Debug\net7.0
+cd src\InfoSearch\Executable\InfoSearch.IndexApp\bin\Debug\net7.0
 InfoSearch.IndexApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
 ````
 
@@ -35,3 +35,5 @@ sherlock OR dorian AND gray
 sherlock OR dorian OR dracula
 sherlock OR dorian OR dracula NOT whale
 ````
+
+To exit enter one of these options: exit, quit, e, q
