@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InfoSearch.IndexApp": {
+      "commandName": "Project",
+      "commandLineArgs": "-t epub -d C:\\Users\\Oleksandr_Barsuk\\Downloads\\epub"
+    }
+  }
+}

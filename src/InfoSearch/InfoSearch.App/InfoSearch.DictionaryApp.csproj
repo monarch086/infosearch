@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfoSearch.ConsoleUtils\InfoSearch.ConsoleUtils.csproj" />
+    <ProjectReference Include="..\InfoSearch.Core\InfoSearch.Core.csproj" />
+    <ProjectReference Include="..\InfoSearch.Parsing\InfoSearch.Parsing.csproj" />
+    <ProjectReference Include="..\InfoSearch.Serializing\InfoSearch.Serializing.csproj" />
+  </ItemGroup>
+
+</Project>

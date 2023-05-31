@@ -1,4 +1,4 @@
-﻿using InfoSearch.App;
+﻿using InfoSearch.ConsoleUtils;
 using InfoSearch.Core;
 using InfoSearch.Parsing;
 using InfoSearch.Serializing;
