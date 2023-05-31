@@ -42,10 +42,8 @@ public class StaticIncidenceMatrix : IIncidenceMatrix
         }
     }
 
-    public bool[] GetDocumentIncidence(string term)
-    {
-        return _matrix.ContainsKey(term) ? _matrix[term] : GetEmptyRow();
-    }
+    public bool[] GetDocumentIncidence(string term) =>
+        _matrix.ContainsKey(term) ? _matrix[term] : GetEmptyRow();
 
     public string[] GetDocumentNames(bool[] incidence)
     {
@@ -58,8 +56,6 @@ public class StaticIncidenceMatrix : IIncidenceMatrix
         return resultDocs.ToArray();
     }
 
-    private bool[] GetEmptyRow()
-    {
-        return _documentNames.Select(_ => false).ToArray();
-    }
+    private bool[] GetEmptyRow() =>
+        _documentNames.Select(_ => false).ToArray();
 }

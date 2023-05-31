@@ -54,8 +54,6 @@ internal class DynamicIncidenceMatrix : IIncidenceMatrix
         return resultDocs.ToArray();
     }
 
-    private IList<bool> GetEmptyRow()
-    {
-        return _documentNames.Select(_ => false).ToList();
-    }
+    private IList<bool> GetEmptyRow() =>
+        _documentNames.Select(_ => false).ToList();
 }

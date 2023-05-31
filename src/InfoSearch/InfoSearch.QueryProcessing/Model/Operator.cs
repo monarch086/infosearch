@@ -1,4 +1,4 @@
-﻿namespace InfoSearch.Core.Model.Query;
+﻿namespace InfoSearch.QueryProcessing.Model;
 
 public enum Operator
 {

@@ -1,4 +1,4 @@
-﻿using InfoSearch.Core.Model.Query;
+﻿using InfoSearch.QueryProcessing.Model;
 
 namespace InfoSearch.Core;
 

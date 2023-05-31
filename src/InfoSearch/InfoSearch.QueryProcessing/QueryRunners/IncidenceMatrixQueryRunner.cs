@@ -1,6 +1,6 @@
 ﻿using InfoSearch.Core;
 using InfoSearch.Core.Indexes;
-using InfoSearch.Core.Model.Query;
+using InfoSearch.QueryProcessing.Model;
 
 namespace InfoSearch.QueryProcessing.QueryRunners;
 
