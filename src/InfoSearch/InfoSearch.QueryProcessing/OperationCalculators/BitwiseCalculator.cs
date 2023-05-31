@@ -1,8 +1,8 @@
 ﻿using InfoSearch.QueryProcessing.Model;
 
-namespace InfoSearch.QueryProcessing;
+namespace InfoSearch.QueryProcessing.OperationCalculators;
 
-public static class BitwiseCalculator
+internal static class BitwiseCalculator
 {
     public static bool[] Calculate(Operator operation, bool[] incidenceA, bool[] incidenceB)
     {

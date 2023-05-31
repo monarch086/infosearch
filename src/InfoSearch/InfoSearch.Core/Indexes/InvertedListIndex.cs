@@ -30,9 +30,9 @@ public class InvertedListIndex
         }
     }
 
-    public int[] GetDocumentList(string term) =>
-        _index.ContainsKey(term) ? _index[term].ToArray() : Array.Empty<int>();
+    public IList<int> GetDocumentList(string term) =>
+        _index.ContainsKey(term) ? _index[term] : Array.Empty<int>();
 
-    public string[] GetDocumentNames(int[] list) =>
+    public string[] GetDocumentNames(IList<int> list) =>
         list.Select(e => _documentNames[e]).ToArray();
 }

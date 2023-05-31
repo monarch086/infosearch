@@ -31,8 +31,11 @@ internal class Program
             documentList.Add(new Document(document, parsedText));
         }
 
-        var index = new StaticIncidenceMatrix(documentList);
-        var queryRunner = new IncidenceMatrixQueryRunner(index);
+        //var index = new StaticIncidenceMatrix(documentList);
+        //var queryRunner = new IncidenceMatrixQueryRunner(index);
+
+        var index = new InvertedListIndex(documentList);
+        var queryRunner = new InvertedIndexQueryRunner(index);
 
         string queryString = string.Empty;
 
