@@ -4,7 +4,10 @@
 
 ## InfoSearch Dictionary
 
-App creates set of unique words out of provided PDF or EPUB documents.
+Practical work #1:
+Dictionary.
+
+App creates set of unique terms out of provided PDF or EPUB documents.
 
 Run example:
 
@@ -20,6 +23,9 @@ InfoSearch.DictionaryApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub -s 
  - -s/--serializer - the type of serializer: text, json, binary.
 
 ## InfoSearch Indexes
+
+Practical work #2:
+Boolean Search. Incidence Matrix and Inverted List Indexes
 
 Run example:
 
