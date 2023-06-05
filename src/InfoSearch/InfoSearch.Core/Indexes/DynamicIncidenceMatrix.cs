@@ -1,4 +1,5 @@
-﻿using InfoSearch.Core.Model;
+﻿using InfoSearch.Core.Extensions;
+using InfoSearch.Core.Model;
 
 namespace InfoSearch.Core.Indexes;
 
