@@ -6,9 +6,6 @@ internal class CoordinatesCalculator
     {
         var documents = coordinatesA.Keys.Intersect(coordinatesB.Keys);
 
-        // Console.WriteLine($"Coordinates in l1: {string.Join(", ", coordinatesA[4])}");
-        // Console.WriteLine($"Coordinates in l2: {string.Join(", ", coordinatesB[4])}");
-
         var result = new HashSet<int>();
 
         foreach ( var document in documents )

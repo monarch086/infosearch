@@ -33,6 +33,7 @@ public class CoordinateIndexQueryRunner : IQueryRunner<CoordinateQueryComponent>
                 continue;
             }
 
+            // Here CoordinatesCalculatorRecursive can be used
             var intersectDocs = CoordinatesCalculator.Intersection(prevCoordinates, coordinates, component.Distance);
 
             documentIndexes = documentIndexes.Intersect(intersectDocs).ToList();
