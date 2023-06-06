@@ -1,24 +1,25 @@
-﻿using InfoSearch.QueryProcessing.Model;
+﻿using InfoSearch.Core;
+using InfoSearch.QueryProcessing.Model.BooleanQuery;
 
-namespace InfoSearch.QueryProcessing;
+namespace InfoSearch.QueryProcessing.QueryParsers;
 
-public static class QueryParser
+public class BoolQueryParser : IQueryParser<BoolQueryComponent>
 {
-    public static Query Parse(string query)
+    public IQuery<BoolQueryComponent> Parse(string query)
     {
         var separators = new char[] { ' ', ',' };
         var operators = new string[] { "AND", "OR", "NOT" };
-        var parsedQuery = new Query();
+        var parsedQuery = new BoolQuery();
 
         try
         {
             var elements = query.Split(separators);
-            var queryComponent = new QueryComponent();
+            var queryComponent = new BoolQueryComponent();
 
             for (int i = 0; i < elements.Length; i++)
             {
                 if (operators.Contains(elements[i]))
-                    queryComponent.Operator = Enum.Parse<Operator>(elements[i]);
+                    queryComponent.Operator = Enum.Parse<BoolOperator>(elements[i]);
                 else
                     queryComponent.Term = elements[i].ToLower().Trim();
 
@@ -28,7 +29,7 @@ public static class QueryParser
                 if (firstComponentIsReady || otherComponentsAreReady)
                 {
                     parsedQuery.Components.Add(queryComponent);
-                    queryComponent = new QueryComponent();
+                    queryComponent = new BoolQueryComponent();
                 }
             }
         }

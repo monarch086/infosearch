@@ -3,7 +3,7 @@ using InfoSearch.Core;
 using InfoSearch.Core.Indexes;
 using InfoSearch.Core.Model;
 using InfoSearch.Parsing;
-using InfoSearch.QueryProcessing;
+using InfoSearch.QueryProcessing.QueryParsers;
 using InfoSearch.QueryProcessing.QueryRunners;
 
 namespace InfoSearch.IndexApp;
@@ -55,7 +55,8 @@ internal class Program
             if (string.IsNullOrEmpty(queryString))
                 continue;
 
-            var query = QueryParser.Parse(queryString);
+            var queryParser = new BoolQueryParser();
+            var query = queryParser.Parse(queryString);
 
             _watch.Start();
             var searchResults = queryRunner.Run(query);

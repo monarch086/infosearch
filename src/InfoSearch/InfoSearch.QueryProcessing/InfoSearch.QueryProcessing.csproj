@@ -10,4 +10,8 @@
     <ProjectReference Include="..\InfoSearch.Core\InfoSearch.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\CoordinateQuery\" />
+  </ItemGroup>
+
 </Project>

@@ -20,7 +20,7 @@ public static class TermExtensions
             .ToArray();
     }
 
-    public static IEnumerable<WordPair> ToPairs(this IEnumerable<string> terms)
+    public static IList<WordPair> ToPairs(this IEnumerable<string> terms)
     {
         if (terms.Count() == 1)
         {

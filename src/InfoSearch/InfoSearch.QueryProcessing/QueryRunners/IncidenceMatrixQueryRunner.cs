@@ -1,11 +1,11 @@
 ﻿using InfoSearch.Core;
 using InfoSearch.Core.Indexes;
-using InfoSearch.QueryProcessing.Model;
+using InfoSearch.QueryProcessing.Model.BooleanQuery;
 using InfoSearch.QueryProcessing.OperationCalculators;
 
 namespace InfoSearch.QueryProcessing.QueryRunners;
 
-public class IncidenceMatrixQueryRunner : IQueryRunner
+public class IncidenceMatrixQueryRunner : IQueryRunner<BoolQueryComponent>
 {
     private readonly IIncidenceMatrix _index;
 
@@ -14,7 +14,7 @@ public class IncidenceMatrixQueryRunner : IQueryRunner
         _index = index;
     }
 
-    public IEnumerable<string> Run(Query query)
+    public IEnumerable<string> Run(IQuery<BoolQueryComponent> query)
     {
         var firstTerm = query.Components[0].Term;
         var resultDocumentIncidence = _index.GetDocumentIncidence(firstTerm);

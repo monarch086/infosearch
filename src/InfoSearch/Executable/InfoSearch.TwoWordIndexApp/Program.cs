@@ -4,6 +4,7 @@ using InfoSearch.Core;
 using InfoSearch.Parsing;
 using InfoSearch.QueryProcessing.QueryRunners;
 using InfoSearch.Core.Model;
+using InfoSearch.QueryProcessing.QueryParsers;
 
 namespace InfoSearch.TwoWordIndexApp
 {
@@ -45,14 +46,17 @@ namespace InfoSearch.TwoWordIndexApp
 
             Console.WriteLine("Please enter your query:");
             string queryString = Console.ReadLine() ?? string.Empty;
+            var queryParser = new PairQueryParser();
 
             while (!_exitCommands.Contains(queryString))
             {
                 if (string.IsNullOrEmpty(queryString))
                     continue;
 
+                var query = queryParser.Parse(queryString);
+
                 _watch.Start();
-                var searchResults = queryRunner.Run(queryString);
+                var searchResults = queryRunner.Run(query);
                 _watch.Stop();
                 _watch.Print("Searching documents");
 

@@ -1,10 +1,10 @@
-﻿using InfoSearch.QueryProcessing.Model;
+﻿using InfoSearch.QueryProcessing.Model.BooleanQuery;
 
 namespace InfoSearch.QueryProcessing.OperationCalculators;
 
 internal static class BitwiseCalculator
 {
-    public static bool[] Calculate(Operator operation, bool[] incidenceA, bool[] incidenceB)
+    public static bool[] Calculate(BoolOperator operation, bool[] incidenceA, bool[] incidenceB)
     {
         if (incidenceA.Length != incidenceB.Length)
             throw new ArgumentException("Provided incidence arrays should have the same length.");
@@ -13,21 +13,21 @@ internal static class BitwiseCalculator
 
         switch (operation)
         {
-            case Operator.AND:
+            case BoolOperator.AND:
                 for (int i = 0; i < incidenceA.Count(); i++)
                 {
                     result[i] = incidenceA[i] & incidenceB[i];
                 }
                 return result;
 
-            case Operator.OR:
+            case BoolOperator.OR:
                 for (int i = 0; i < incidenceA.Count(); i++)
                 {
                     result[i] = incidenceA[i] | incidenceB[i];
                 }
                 return result;
 
-            case Operator.NOT:
+            case BoolOperator.NOT:
                 for (int i = 0; i < incidenceA.Count(); i++)
                 {
                     result[i] = incidenceA[i] & !incidenceB[i];

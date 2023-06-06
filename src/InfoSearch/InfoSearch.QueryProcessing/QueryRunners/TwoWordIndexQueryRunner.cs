@@ -1,32 +1,24 @@
-﻿using InfoSearch.Core.Extensions;
+﻿using InfoSearch.Core;
 using InfoSearch.Core.Indexes;
 
 namespace InfoSearch.QueryProcessing.QueryRunners;
 
-public class TwoWordIndexQueryRunner
+public class TwoWordIndexQueryRunner : IQueryRunner<WordPair>
 {
     private readonly TwoWordIndex _index;
 
     public TwoWordIndexQueryRunner(TwoWordIndex index)
     {
-            _index = index;
+        _index = index;
     }
 
-    public IEnumerable<string> Run(string query)
+    public IEnumerable<string> Run(IQuery<WordPair> query)
     {
-        var terms = query.SplitTerms();
-        if (terms.Length == 1)
-        {
-            throw new ArgumentException("There should be at least two terms in query.");
-        }
+        Console.WriteLine($"Word pairs: {string.Join(", ", query.Components)}");
 
-        var pairs = terms.ToPairs();
+        var documentResultSets = new List<IEnumerable<int>>();
 
-        Console.WriteLine($"Word pairs: {string.Join(", ", pairs)}");
-
-        var documentResultSets = new List<IEnumerable<int>>(terms.Length - 1);
-
-        foreach (var pair in pairs)
+        foreach (var pair in query.Components)
         {
             var result = _index.GetDocumentList(pair);
 
