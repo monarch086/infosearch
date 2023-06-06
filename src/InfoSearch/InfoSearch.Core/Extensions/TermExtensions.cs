@@ -14,7 +14,7 @@ public static class TermExtensions
         return document.Split(delimiters)
             .Select(s => s.Trim(trimChars))
             .Select(s => s.Trim())
-            .Where(s => !Regex.Match(s, @"[^\p{L}]").Success) // Exclude terms with non-letter chars
+            //.Where(s => !Regex.Match(s, @"[^\p{L}]").Success) // Exclude terms with non-letter chars
             .Select(s => s.ToLower())
             .Where(s => s.Length > 1)
             .ToArray();

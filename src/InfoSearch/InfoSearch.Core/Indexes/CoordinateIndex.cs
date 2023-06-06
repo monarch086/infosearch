@@ -51,4 +51,7 @@ public class CoordinateIndex
     {
         return _index.ContainsKey(term) ? _index[term] : new Dictionary<int, IList<int>>();
     }
+
+    public string[] GetDocumentNames(IEnumerable<int> docIndexes) =>
+        docIndexes.Select(i => _documentNames[i]).ToArray();
 }

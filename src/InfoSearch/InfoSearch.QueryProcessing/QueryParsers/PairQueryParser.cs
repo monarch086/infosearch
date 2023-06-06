@@ -1,7 +1,7 @@
 ﻿using InfoSearch.Core;
 using InfoSearch.Core.Extensions;
 using InfoSearch.Core.Indexes;
-using InfoSearch.QueryProcessing.Model.PairsQuery;
+using InfoSearch.QueryProcessing.Model;
 
 namespace InfoSearch.QueryProcessing.QueryParsers;
 

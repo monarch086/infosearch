@@ -68,3 +68,23 @@ The two men were pitying each other
 Despair seized me
 Then there came the sound of many feet tramping and dying away in some
 ````
+
+## InfoSearch Coordinate Index
+
+Run example:
+
+````sh
+cd src\InfoSearch\Executable\InfoSearch.CoordinateIndexApp\bin\Debug\net7.0
+InfoSearch.CoordinateIndexApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
+````
+
+Query format to provide:
+
+````sh
+son /d=5 of Pelagon
+
+she read this letter
+she /d=100 read /d=100 this /d=100 letter
+
+she /d=1 read /d=1 this /d=1 letter
+````
