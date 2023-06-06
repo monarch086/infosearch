@@ -6,6 +6,9 @@ internal class CoordinatesCalculator
     {
         var documents = coordinatesA.Keys.Intersect(coordinatesB.Keys);
 
+        // Console.WriteLine($"Coordinates in l1: {string.Join(", ", coordinatesA[4])}");
+        // Console.WriteLine($"Coordinates in l2: {string.Join(", ", coordinatesB[4])}");
+
         var result = new HashSet<int>();
 
         foreach ( var document in documents )
@@ -18,7 +21,7 @@ internal class CoordinatesCalculator
                 if (list1[i] < list2[j])
                     if (i == list1.Count() - 1 || list1[i + 1] > list2[j])
                     {
-                        if (list2[j] - list1[i] <= distance)
+                        if (list2[j] - list1[i] <= distance || i < list1.Count() - 1 && list1[i + 1] - list2[j] <= distance)
                         {
                             result.Add(document);
                         }
@@ -33,7 +36,7 @@ internal class CoordinatesCalculator
                 {
                     if (j == list2.Count() - 1 || list2[j + 1] > list1[i])
                     {
-                        if (list1[i] - list2[j] <= distance)
+                        if (list1[i] - list2[j] <= distance || j < list2.Count() - 1 && list2[j + 1] - list1[i] <= distance)
                         {
                             result.Add(document);
                         }
