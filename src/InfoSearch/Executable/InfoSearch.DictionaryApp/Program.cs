@@ -1,5 +1,6 @@
 ﻿using InfoSearch.ConsoleUtils;
 using InfoSearch.Core;
+using InfoSearch.Core.Extensions;
 using InfoSearch.Parsing;
 using InfoSearch.Serializing;
 

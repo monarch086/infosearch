@@ -6,7 +6,7 @@ using InfoSearch.Parsing;
 using InfoSearch.QueryProcessing.QueryParsers;
 using InfoSearch.QueryProcessing.QueryRunners;
 
-namespace InfoSearch.IndexApp;
+namespace InfoSearch.CoordinateIndexApp;
 
 internal class Program
 {
@@ -38,24 +38,21 @@ internal class Program
         _watch.Print("Parsing documents");
 
         _watch.Start();
-        var index = new StaticIncidenceMatrix(documentList);
-        var queryRunner = new IncidenceMatrixQueryRunner(index);
-
-        //var index = new InvertedListIndex(documentList);
-        //var queryRunner = new InvertedIndexQueryRunner(index);
+        var index = new CoordinateIndex(documentList);
+        var queryRunner = new CoordinateIndexQueryRunner(index);
 
         _watch.Stop();
         _watch.Print("Creating index");
 
         Console.WriteLine("Please enter your query:");
         string queryString = Console.ReadLine() ?? string.Empty;
+        var queryParser = new CoordinateQueryParser();
 
         while (!_exitCommands.Contains(queryString))
         {
             if (string.IsNullOrEmpty(queryString))
                 continue;
 
-            var queryParser = new BoolQueryParser();
             var query = queryParser.Parse(queryString);
 
             _watch.Start();
