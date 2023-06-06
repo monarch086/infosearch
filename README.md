@@ -81,10 +81,23 @@ InfoSearch.CoordinateIndexApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epu
 Query format to provide:
 
 ````sh
-son /d=5 of Pelagon
+# The Iliad by Homer
+son /d=5 of Pelagon    # Stack overflow with recursive algorithm
 
-she read this letter
+# Middlemarch by George Eliot
 she /d=100 read /d=100 this /d=100 letter
-
 she /d=1 read /d=1 this /d=1 letter
+
+accurate /d=1 statement
+accurate /d=100 statement
+
+cannot /d=1 but /d=1 feel /d=1 that /d=1 resignation    # Stack overflow with recursive algorithm
+cannot /d=100 but /d=100 feel /d=100 that /d=100 resignation
+
+find /d=10 records
+find /d=1 records
+
+# Dracula by Bram Stoker
+He /d=10 is /d=10 waking!    # Stack overflow with recursive algorithm
+willing, /d=10 Wilhelmina
 ````
