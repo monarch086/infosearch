@@ -21,7 +21,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.IndexApp", "Exec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.TwoWordIndexApp", "Executable\InfoSearch.TwoWordIndexApp\InfoSearch.TwoWordIndexApp.csproj", "{EC07E9F1-0FE9-4CA8-9636-9E1D4758ABE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.CoordinateIndexApp", "Executable\InfoSearch.CoordinateIndexApp\InfoSearch.CoordinateIndexApp.csproj", "{B7795A8D-63F5-451F-8C9C-E0097D2577BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.CoordinateIndexApp", "Executable\InfoSearch.CoordinateIndexApp\InfoSearch.CoordinateIndexApp.csproj", "{B7795A8D-63F5-451F-8C9C-E0097D2577BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostgreSQL", "PostgreSQL", "{B5EDDE47-2DEF-4134-97E4-70B04AE5CF72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.PgSearchCore", "PostgreSQL\InfoSearch.PgSearchCore\InfoSearch.PgSearchCore.csproj", "{A9D906E2-2C08-46B7-9F6C-F7947FE9235E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.PgSearch.Model", "PostgreSQL\InfoSearch.PgSearch.Model\InfoSearch.PgSearch.Model.csproj", "{7770AA84-BED4-4BE0-BF3A-475C3BF46996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.PgSearch.App", "PostgreSQL\InfoSearch.PgSearch.App\InfoSearch.PgSearch.App.csproj", "{040B2A98-5E24-4FE8-B48E-44BCA66B087E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +73,18 @@ Global
 		{B7795A8D-63F5-451F-8C9C-E0097D2577BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7795A8D-63F5-451F-8C9C-E0097D2577BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7795A8D-63F5-451F-8C9C-E0097D2577BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9D906E2-2C08-46B7-9F6C-F7947FE9235E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D906E2-2C08-46B7-9F6C-F7947FE9235E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D906E2-2C08-46B7-9F6C-F7947FE9235E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D906E2-2C08-46B7-9F6C-F7947FE9235E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7770AA84-BED4-4BE0-BF3A-475C3BF46996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7770AA84-BED4-4BE0-BF3A-475C3BF46996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7770AA84-BED4-4BE0-BF3A-475C3BF46996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7770AA84-BED4-4BE0-BF3A-475C3BF46996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{040B2A98-5E24-4FE8-B48E-44BCA66B087E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040B2A98-5E24-4FE8-B48E-44BCA66B087E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040B2A98-5E24-4FE8-B48E-44BCA66B087E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040B2A98-5E24-4FE8-B48E-44BCA66B087E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +94,9 @@ Global
 		{0856FEC0-6123-4B14-8271-397D46F94823} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
 		{EC07E9F1-0FE9-4CA8-9636-9E1D4758ABE6} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
 		{B7795A8D-63F5-451F-8C9C-E0097D2577BE} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
+		{A9D906E2-2C08-46B7-9F6C-F7947FE9235E} = {B5EDDE47-2DEF-4134-97E4-70B04AE5CF72}
+		{7770AA84-BED4-4BE0-BF3A-475C3BF46996} = {B5EDDE47-2DEF-4134-97E4-70B04AE5CF72}
+		{040B2A98-5E24-4FE8-B48E-44BCA66B087E} = {B5EDDE47-2DEF-4134-97E4-70B04AE5CF72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C432D75-7910-43B2-AE21-B47C0C1B8B9C}
