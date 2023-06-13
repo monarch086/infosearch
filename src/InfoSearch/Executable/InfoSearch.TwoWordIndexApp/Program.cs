@@ -5,20 +5,23 @@ using InfoSearch.Parsing;
 using InfoSearch.QueryProcessing.QueryRunners;
 using InfoSearch.Core.Model;
 using InfoSearch.QueryProcessing.QueryParsers;
+using static InfoSearch.ConsoleUtils.Constants;
 
 namespace InfoSearch.TwoWordIndexApp
 {
     internal class Program
     {
         private static ParserResolver _parserResolver = new ParserResolver();
-        private static string[] _exitCommands = { "exit", "quit", "e", "q" };
         private static StopWatch _watch = new StopWatch();
 
         static void Main(string[] args)
         {
             Console.WriteLine("InfoSearch Indexes");
 
-            var options = ArgsParser.Parse(args);
+            var options = new ConsoleOptions();
+            var optionSet = new OptionSetBuilder().Build(options);
+            options = ArgsParser.Parse(args, optionSet, options);
+
             var parser = _parserResolver.Resolve(options.Type);
 
             var documents = FileScanner.Scan(options.WorkingDirectory, parser.SearchPattern);
@@ -48,7 +51,7 @@ namespace InfoSearch.TwoWordIndexApp
             string queryString = Console.ReadLine() ?? string.Empty;
             var queryParser = new PairQueryParser();
 
-            while (!_exitCommands.Contains(queryString))
+            while (!EXIT_COMMANDS.Contains(queryString))
             {
                 if (string.IsNullOrEmpty(queryString))
                     continue;

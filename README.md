@@ -101,3 +101,29 @@ find /d=1 records
 He /d=10 is /d=10 waking!    # Stack overflow with recursive algorithm
 willing, /d=10 Wilhelmina
 ````
+
+## InfoSearch PostreSQL Extensions
+
+Run example:
+
+````sh
+cd src\InfoSearch\PostgreSQL\InfoSearch.PgSearch.App\bin\Debug\net7.0
+InfoSearch.PgSearch.App -t byauthor
+````
+
+Params:
+
+- -t - search type: ByAuthor or ByTitle;
+
+Query examples to provide by author:
+`wels`, `sidni`, `doil`, `brem`, `artur`
+
+Query examples to provide by title:
+
+`pictur of dorian`
+
+`rum with a few`
+
+`ventures of serloc`
+
+`mobi dick`
