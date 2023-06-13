@@ -1,4 +1,5 @@
 ﻿using InfoSearch.ConsoleUtils;
+using InfoSearch.ConsoleUtils.OptionsWithSerializer;
 using InfoSearch.Core;
 using InfoSearch.Core.Extensions;
 using InfoSearch.Parsing;
@@ -13,7 +14,10 @@ public class Program
     {
         Console.WriteLine("InfoSearch Dictionary");
 
-        var options = ArgsParser.Parse(args);
+        var options = new ConsoleOptionsExtended();
+        var optionSet = new OptionSetBuilderExtended().Build(options);
+        options = ArgsParser.Parse(args, optionSet, options);
+
         var parser = parserResolver.Resolve(options.Type);
 
         var documents = FileScanner.Scan(options.WorkingDirectory, parser.SearchPattern);

@@ -5,20 +5,23 @@ using InfoSearch.Core.Model;
 using InfoSearch.Parsing;
 using InfoSearch.QueryProcessing.QueryParsers;
 using InfoSearch.QueryProcessing.QueryRunners;
+using static InfoSearch.ConsoleUtils.Constants;
 
 namespace InfoSearch.IndexApp;
 
 internal class Program
 {
     private static ParserResolver _parserResolver = new ParserResolver();
-    private static string[] _exitCommands = { "exit", "quit", "e", "q" };
     private static StopWatch _watch = new StopWatch();
 
     static void Main(string[] args)
     {
         Console.WriteLine("InfoSearch Indexes");
 
-        var options = ArgsParser.Parse(args);
+        var options = new ConsoleOptions();
+        var optionSet = new OptionSetBuilder().Build(options);
+        options = ArgsParser.Parse(args, optionSet, options);
+
         var parser = _parserResolver.Resolve(options.Type);
 
         var documents = FileScanner.Scan(options.WorkingDirectory, parser.SearchPattern);
@@ -50,7 +53,7 @@ internal class Program
         Console.WriteLine("Please enter your query:");
         string queryString = Console.ReadLine() ?? string.Empty;
 
-        while (!_exitCommands.Contains(queryString))
+        while (!EXIT_COMMANDS.Contains(queryString))
         {
             if (string.IsNullOrEmpty(queryString))
                 continue;

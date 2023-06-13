@@ -1,29 +1,15 @@
-﻿using InfoSearch.Core;
-using Mono.Options;
+﻿using Mono.Options;
 
 namespace InfoSearch.ConsoleUtils;
 
 public static class ArgsParser
 {
-    public static ConsoleOptions Parse(string[] args)
+    public static T Parse<T>(string[] args, OptionSet optionSet, T options) where T : class, new()
     {
-        var options = new ConsoleOptions();
-
-        var p = new OptionSet() {
-                { "t|type=", "the {TYPE} of parser.",
-                   (ParserType v) => options.Type = v },
-                { "d|directory=",
-                   "the directory to scan for the documents.\n" +
-                      "this must be an integer.",
-                    (v) => options.WorkingDirectory = v },
-                { "s|serializer=", "the type of serializer.",
-                   (SerializerType v) => options.SerializerType = v },
-            };
-
         List<string> extra;
         try
         {
-            extra = p.Parse(args);
+            extra = optionSet.Parse(args);
             return options;
         }
         catch (OptionException e)

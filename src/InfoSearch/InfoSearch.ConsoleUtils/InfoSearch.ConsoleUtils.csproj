@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InfoSearch.Core\InfoSearch.Core.csproj" />
+    <ProjectReference Include="..\PostgreSQL\InfoSearch.PgSearchCore\InfoSearch.PgSearchCore.csproj" />
   </ItemGroup>
 
 </Project>
