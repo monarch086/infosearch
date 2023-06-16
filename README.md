@@ -134,3 +134,10 @@ Query examples to provide by title:
 cd src\InfoSearch\Executable\InfoSearch.TrigramIndexApp\bin\Debug\net7.0
 InfoSearch.TrigramIndexApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
 ````
+
+## InfoSearch Trie Search
+
+````sh
+cd src\InfoSearch\Executable\InfoSearch.TrieApp\bin\Debug\net7.0
+InfoSearch.TrieApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
+````
