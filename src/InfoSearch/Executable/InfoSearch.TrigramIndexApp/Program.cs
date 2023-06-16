@@ -53,12 +53,11 @@ internal class Program
                 continue;
 
             _watch.Start();
-            var searchResults = index.GetDocumentList(queryString);
-            var searchDocumentNames = index.GetDocumentNames(searchResults);
+            var searchResults = index.GetTerms(queryString);
             _watch.Stop();
             _watch.Print("Searching documents");
 
-            Console.WriteLine($"Search results for query \"{queryString}\":\n - {string.Join("\n - ", searchDocumentNames)}.");
+            Console.WriteLine($"Search results for query \"{queryString}\":\n - {string.Join("\n - ", searchResults)}.");
 
             Console.WriteLine("Please enter your query:");
             queryString = Console.ReadLine() ?? string.Empty;
