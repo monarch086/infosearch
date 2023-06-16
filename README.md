@@ -127,3 +127,10 @@ Query examples to provide by title:
 `ventures of serloc`
 
 `mobi dick`
+
+## InfoSearch Trigram Index
+
+````sh
+cd src\InfoSearch\Executable\InfoSearch.TrigramIndexApp\bin\Debug\net7.0
+InfoSearch.TrigramIndexApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
+````
