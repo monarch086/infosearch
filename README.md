@@ -109,6 +109,8 @@ Run example:
 ````sh
 cd src\InfoSearch\PostgreSQL\InfoSearch.PgSearch.App\bin\Debug\net7.0
 InfoSearch.PgSearch.App -t byauthor
+
+InfoSearch.PgSearch.App -t bytitle
 ````
 
 Params:

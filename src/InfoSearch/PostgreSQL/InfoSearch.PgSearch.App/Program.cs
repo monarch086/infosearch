@@ -19,6 +19,9 @@ internal class Program
         var optionSet = new PgOptionSetBuilder().Build(options);
         options = ArgsParser.Parse(args, optionSet, options);
 
+        var allBooks = _repository.GetAllBooks();
+        Console.WriteLine($"All available books:\n - {string.Join("\n - ", allBooks)}.");
+
         Console.WriteLine("Please enter your query:");
         string queryString = Console.ReadLine() ?? string.Empty;
 

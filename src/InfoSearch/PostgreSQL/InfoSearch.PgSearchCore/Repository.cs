@@ -24,6 +24,23 @@ public class Repository
         });
     }
 
+    public IEnumerable<Book> GetAllBooks()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
+        {
+            var sql =
+            @"SELECT * FROM books b
+            INNER JOIN authors a ON a.id = b.author_id
+            ORDER BY b.title";
+
+            var books = connection.Query<Book, Author, Book>(
+                sql,
+                (book, author) => { book.Author = author; return book; });
+
+            return books;
+        }
+    }
+
     public IEnumerable<Book> SearchByAuthor(string name)
     {
         using (var connection = new NpgsqlConnection(ConnectionString))
