@@ -29,7 +29,7 @@ public class TrigramIndex
 
                 var termIndex = _termsList.Count() - 1;
 
-                var trigrams = GetTrigrams(term);
+                var trigrams = GetTrigrams($"${term}$");
 
                 foreach (var trigram in trigrams)
                 {
@@ -52,10 +52,7 @@ public class TrigramIndex
 
         foreach (var part in queryParts)
         {
-            var trigrams = GetTrigrams(part);
-
-            if (part == queryParts[0] && trigrams.Count() > 0) trigrams.Remove(trigrams.Last());
-            else if (part == queryParts[1] && trigrams.Count() > 0) trigrams.Remove(trigrams.First());
+            var trigrams = part == queryParts[0] ? GetTrigrams($"${part}") : GetTrigrams($"{part}$");
 
             foreach (var trigram in trigrams)
             {
@@ -82,34 +79,20 @@ public class TrigramIndex
     {
         var trigrams = new List<string>();
 
-        if (term.Length == 1)
+        if (term == "$")
         {
-            trigrams.Add($"  {term}");
-            trigrams.Add($"{term}  ");
             return trigrams;
         }
 
-        if (term.Length == 2)
+        if (term.Length <= 2)
         {
-            trigrams.Add($" {term}");
-            trigrams.Add($"{term} ");
+            trigrams.Add($"{term}");
             return trigrams;
         }
 
-        for (int i = 0; i < term.Length; i++)
+        for (int i = 1; i < term.Length - 1; i++)
         {
-            if (i == 0)
-            {
-                trigrams.Add($" {term[i]}{term[i + 1]}");
-            }
-            else if (i == term.Length - 1)
-            {
-                trigrams.Add($"{term[i - 1]}{term[i]} ");
-            }
-            else
-            {
-                trigrams.Add($"{term[i - 1]}{term[i]}{term[i + 1]}");
-            }
+            trigrams.Add($"{term[i - 1]}{term[i]}{term[i + 1]}");
         }
 
         return trigrams;
