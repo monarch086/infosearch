@@ -109,6 +109,8 @@ Run example:
 ````sh
 cd src\InfoSearch\PostgreSQL\InfoSearch.PgSearch.App\bin\Debug\net7.0
 InfoSearch.PgSearch.App -t byauthor
+
+InfoSearch.PgSearch.App -t bytitle
 ````
 
 Params:
@@ -127,3 +129,21 @@ Query examples to provide by title:
 `ventures of serloc`
 
 `mobi dick`
+
+## InfoSearch Trigram Index
+
+````sh
+cd src\InfoSearch\Executable\InfoSearch.TrigramIndexApp\bin\Debug\net7.0
+InfoSearch.TrigramIndexApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
+````
+
+Query examples: `*check`, `check*`, `ch*ck`
+
+## InfoSearch Trie Search
+
+````sh
+cd src\InfoSearch\Executable\InfoSearch.TrieApp\bin\Debug\net7.0
+InfoSearch.TrieApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
+````
+
+Query examples: `*check`, `check*`, `ch*ck`
