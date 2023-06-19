@@ -11,4 +11,6 @@ public class Document
         Name = name;
         Text = text;
     }
+
+    public Document() { }
 }

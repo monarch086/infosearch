@@ -1,91 +1,80 @@
 ﻿using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
+using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
 using Directory = Lucene.Net.Store.Directory;
+using InfoSearchDocument = InfoSearch.Core.Model.Document;
 
 namespace Lucene.Core;
 
 public class LuceneService : IDisposable
 {
-    //private Analyzer analyzer = new WhitespaceAnalyzer();
-    private Directory indexDirectory;
-    private IndexWriter writer;
-    //private string indexPath = @"c:\temp\LuceneIndex";
-
-    public LuceneService()
-    {
-        InitialiseLucene();
-    }
-
-    private void InitialiseLucene()
-    {
-        // Ensures index backward compatibility
-        const LuceneVersion AppLuceneVersion = LuceneVersion.LUCENE_48;
-
-        // Construct a machine-independent path for the index
-        var basePath = Environment.GetFolderPath(
+    private const string _indexDirName = "index";
+    private string _basePath => Environment.GetFolderPath(
             Environment.SpecialFolder.CommonApplicationData);
-        var indexPath = Path.Combine(basePath, "index");
+    private string _indexPath => Path.Combine(_basePath, _indexDirName);
 
-        indexDirectory = FSDirectory.Open(indexPath);
+    const LuceneVersion LUCENE_VERSION = LuceneVersion.LUCENE_48;
 
-        //using (var dir = FSDirectory.Open(indexPath))
+    private readonly Directory indexDirectory;
+    private readonly IndexWriter writer;
+
+    public LuceneService(IEnumerable<InfoSearchDocument> documents)
+    {
+        indexDirectory = FSDirectory.Open(_indexPath);
+
+        var analyzer = new StandardAnalyzer(LUCENE_VERSION);
+
+        var indexConfig = new IndexWriterConfig(LUCENE_VERSION, analyzer);
+        writer = new IndexWriter(indexDirectory, indexConfig);
+
+        foreach (var document in documents)
         {
-            // Create an analyzer to process the text
-            var analyzer = new StandardAnalyzer(AppLuceneVersion);
-
-            // Create an index writer
-            var indexConfig = new IndexWriterConfig(AppLuceneVersion, analyzer);
-            writer = new IndexWriter(indexDirectory, indexConfig);
-
-            var source = new
-            {
-                Name = "Kermit the Frog",
-                FavoritePhrase = "The quick brown fox jumps over the lazy dog"
-            };
             var doc = new Document
-            {
-                new StringField("name",
-                    source.Name,
-                    Field.Store.YES),
-                new TextField("favoritePhrase",
-                    source.FavoritePhrase,
-                    Field.Store.YES)
-            };
+                {
+                    new TextField("name",
+                        document.Name,
+                        Field.Store.YES),
+                    new TextField("text",
+                        document.Text,
+                        Field.Store.YES)
+                };
 
             writer.AddDocument(doc);
-            writer.Flush(triggerMerge: false, applyAllDeletes: false);
         }
+
+        writer.Flush(triggerMerge: false, applyAllDeletes: false);
     }
 
-    public void Fetch()
+    public IEnumerable<DocumentSearchResult> Fetch(string queryString)
     {
-        // Search with a phrase
-        var phrase = new MultiPhraseQuery
-        {
-            new Term("favoritePhrase", "brown"),
-            new Term("favoritePhrase", "fox"),
-        };
+        var analyzer = new StandardAnalyzer(LUCENE_VERSION);
+        //QueryParser parser = new QueryParser(LUCENE_VERSION, "text", analyzer);
+        QueryParser parser = new MultiFieldQueryParser(LUCENE_VERSION, new string[] { "name", "text" }, analyzer);
+        Query query = parser.Parse(queryString);
 
-        // Re-use the writer to get real-time updates
         using var reader = writer.GetReader(applyAllDeletes: true);
         var searcher = new IndexSearcher(reader);
-        var hits = searcher.Search(phrase, 20 /* top 20 */).ScoreDocs;
+        var hits = searcher.Search(query, 3).ScoreDocs;
 
-        // Display the output in a table
-        Console.WriteLine($"{"Score",10}" +
-            $" {"Name",-15}" +
-            $" {"Favorite Phrase",-40}");
+        var resultDocs = new List<DocumentSearchResult>();
+
         foreach (var hit in hits)
         {
             var foundDoc = searcher.Doc(hit.Doc);
-            Console.WriteLine($"{hit.Score:f8}" +
-                $" {foundDoc.Get("name"),-15}" +
-                $" {foundDoc.Get("favoritePhrase"),-40}");
+
+            resultDocs.Add(new DocumentSearchResult()
+            {
+                Name = foundDoc.Get("name"),
+                Text = foundDoc.Get("text"),
+                Score = hit.Score
+            });
         }
+
+        return resultDocs;
     }
 
     public void Dispose()

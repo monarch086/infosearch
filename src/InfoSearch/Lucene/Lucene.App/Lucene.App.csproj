@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\InfoSearch.ConsoleUtils\InfoSearch.ConsoleUtils.csproj" />
+    <ProjectReference Include="..\..\InfoSearch.Parsing\InfoSearch.Parsing.csproj" />
     <ProjectReference Include="..\Lucene.Core\Lucene.Core.csproj" />
   </ItemGroup>
 
