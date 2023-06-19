@@ -33,7 +33,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.PgSearch.App", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.TrigramIndexApp", "Executable\InfoSearch.TrigramIndexApp\InfoSearch.TrigramIndexApp.csproj", "{509EEDA2-4708-4C0C-8708-001875C8B7B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.TrieApp", "Executable\InfoSearch.TrieApp\InfoSearch.TrieApp.csproj", "{D9385405-A11D-4FFB-9F32-C528440E6E6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.TrieApp", "Executable\InfoSearch.TrieApp\InfoSearch.TrieApp.csproj", "{D9385405-A11D-4FFB-9F32-C528440E6E6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lucene", "Lucene", "{313F554C-EE83-42C6-B645-4207C4A52EB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Core", "Lucene\Lucene.Core\Lucene.Core.csproj", "{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.App", "Lucene\Lucene.App\Lucene.App.csproj", "{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +103,14 @@ Global
 		{D9385405-A11D-4FFB-9F32-C528440E6E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9385405-A11D-4FFB-9F32-C528440E6E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9385405-A11D-4FFB-9F32-C528440E6E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +125,8 @@ Global
 		{040B2A98-5E24-4FE8-B48E-44BCA66B087E} = {B5EDDE47-2DEF-4134-97E4-70B04AE5CF72}
 		{509EEDA2-4708-4C0C-8708-001875C8B7B4} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
 		{D9385405-A11D-4FFB-9F32-C528440E6E6E} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
+		{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97} = {313F554C-EE83-42C6-B645-4207C4A52EB5}
+		{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754} = {313F554C-EE83-42C6-B645-4207C4A52EB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C432D75-7910-43B2-AE21-B47C0C1B8B9C}

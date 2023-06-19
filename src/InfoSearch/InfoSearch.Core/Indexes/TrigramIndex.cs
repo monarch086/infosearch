@@ -29,7 +29,7 @@ public class TrigramIndex
 
                 var termIndex = _termsList.Count() - 1;
 
-                var trigrams = GetTrigrams($"${term}$");
+                var trigrams = GetTrigrams($"$${term}$$");
 
                 foreach (var trigram in trigrams)
                 {
@@ -52,7 +52,7 @@ public class TrigramIndex
 
         foreach (var part in queryParts)
         {
-            var trigrams = part == queryParts[0] ? GetTrigrams($"${part}") : GetTrigrams($"{part}$");
+            var trigrams = part == queryParts[0] ? GetTrigrams($"$${part}") : GetTrigrams($"{part}$$");
 
             foreach (var trigram in trigrams)
             {
@@ -79,7 +79,7 @@ public class TrigramIndex
     {
         var trigrams = new List<string>();
 
-        if (term == "$")
+        if (term == "$$")
         {
             return trigrams;
         }

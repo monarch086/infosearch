@@ -147,3 +147,24 @@ InfoSearch.TrieApp -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
 ````
 
 Query examples: `*check`, `check*`, `ch*ck`
+
+## InfoSearch Lucene.NET full-text search
+
+````sh
+cd src\InfoSearch\Lucene\Lucene.App
+dotnet run -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub
+````
+
+Query examples:
+
+`pictur of dorian`
+
+`pictur of dorian AND gray`
+
+`ventures of serloc`
+
+`mobi dick`
+
+`mobi dick NOT "trimmed lamp"`
+
+`mobi dick OR dracula`
