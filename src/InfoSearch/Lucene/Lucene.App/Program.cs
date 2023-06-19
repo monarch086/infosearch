@@ -38,11 +38,12 @@ internal class Program
         _watch.Stop();
         _watch.Print("Parsing documents");
 
-        _watch.Start();
-        using (var searchService = new LuceneService(documentList))
+        using (var searchService = new LuceneService())
         {
-            _watch.Stop();
-            _watch.Print("Building index");
+            //_watch.Start();
+            //searchService.AddDocuments(documentList);
+            //_watch.Stop();
+            //_watch.Print("Building index");
 
             Console.WriteLine("Please enter your query:");
             string queryString = Console.ReadLine() ?? string.Empty;

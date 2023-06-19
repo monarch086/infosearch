@@ -22,15 +22,19 @@ public class LuceneService : IDisposable
     private readonly Directory indexDirectory;
     private readonly IndexWriter writer;
 
-    public LuceneService(IEnumerable<InfoSearchDocument> documents)
+    public LuceneService()
     {
+        Console.WriteLine("Index path: " + _indexPath);
         indexDirectory = FSDirectory.Open(_indexPath);
 
         var analyzer = new StandardAnalyzer(LUCENE_VERSION);
 
         var indexConfig = new IndexWriterConfig(LUCENE_VERSION, analyzer);
         writer = new IndexWriter(indexDirectory, indexConfig);
+    }
 
+    public void AddDocuments(IEnumerable<InfoSearchDocument> documents)
+    {
         foreach (var document in documents)
         {
             var doc = new Document
@@ -46,7 +50,7 @@ public class LuceneService : IDisposable
             writer.AddDocument(doc);
         }
 
-        writer.Flush(triggerMerge: false, applyAllDeletes: false);
+        writer.Flush(triggerMerge: true, applyAllDeletes: true);
     }
 
     public IEnumerable<DocumentSearchResult> Fetch(string queryString)
