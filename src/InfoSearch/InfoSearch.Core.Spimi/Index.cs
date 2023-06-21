@@ -7,28 +7,19 @@ namespace InfoSearch.Core.Spimi;
 
 public class Index
 {
-    private IDictionary<string, IList<int>> _index;
-    private IList<string> _documentNames;
+    private IDictionary<string, IList<int>> _index = new Dictionary<string, IList<int>>();
+    private IList<string> _documentNames = new List<string>();
 
     private const int BLOCK_SIZE = 1000;
     private const int CONCURRENCY_LEVEL = 4;
 
+    private int _blockCounter = 0;
+    private List<string> _indexBlocks = new List<string>();
+
     private const string DOCUMENT_LIST_FILE = "documents.txt";
 
-    public Index()
+    public void AddDocuments(IEnumerable<Document> documents, string indexPath)
     {
-        _index = new Dictionary<string, IList<int>>();
-        _documentNames = new List<string>();
-    }
-
-    public void BuildIndex(IEnumerable<Document> documents, string indexPath)
-    {
-        var blockCounter = 0;
-        var indexBlocks = new List<string>();
-
-        var mergedBlockCounter = 0;
-        var mergedIndexBlocks = new ConcurrentBag<string>();
-
         var index = new SortedDictionary<string, IList<int>>();
 
         foreach (var document in documents)
@@ -43,11 +34,10 @@ public class Index
             {
                 if (index.Keys.Count() == BLOCK_SIZE)
                 {
-                    var blockName = $"{indexPath}\\index_block_{blockCounter:d8}.txt";
+                    var blockName = $"{indexPath}\\index_block_{_blockCounter++:d8}.txt";
                     WriteIndexBlock(index, blockName);
-                    indexBlocks.Add(blockName);
+                    _indexBlocks.Add(blockName);
                     index.Clear();
-                    blockCounter++;
                 }
 
                 if (!index.ContainsKey(term))
@@ -57,9 +47,23 @@ public class Index
             }
         }
 
-        WriteDocumentNames(_documentNames, $"{indexPath}\\{DOCUMENT_LIST_FILE}");
+        if (index.Keys.Count() > 0)
+        {
+            var blockName = $"{indexPath}\\index_block_{_blockCounter++:d8}.txt";
+            WriteIndexBlock(index, blockName);
+            _indexBlocks.Add(blockName);
+            index.Clear();
+        }
 
-        indexBlocks.ForEach(mergedIndexBlocks.Add);
+        WriteDocumentNames(_documentNames, $"{indexPath}\\{DOCUMENT_LIST_FILE}");
+    }
+
+    public void BuildIndex(string indexPath)
+    {
+        var mergedBlockCounter = 0;
+        var mergedIndexBlocks = new ConcurrentBag<string>();
+
+        _indexBlocks.ForEach(mergedIndexBlocks.Add);
 
         while (mergedIndexBlocks.Count() > 1)
         {
@@ -159,7 +163,7 @@ public class Index
 
             if (parsedLineA.Key == parsedLineB.Key)
             {
-                var mergedLine = new Line
+                var mergedLine = new InvertedListLine
                 {
                     Key = parsedLineA.Key,
                     DocIds = parsedLineA.DocIds.Union(parsedLineB.DocIds).ToList(),
@@ -210,7 +214,7 @@ public class Index
 
                 if (parsedLineA.Key == parsedLineB.Key)
                 {
-                    var mergedLine = new Line
+                    var mergedLine = new InvertedListLine
                     {
                         Key = parsedLineA.Key,
                         DocIds = parsedLineA.DocIds.Union(parsedLineB.DocIds).ToList(),
@@ -239,7 +243,7 @@ public class Index
         }
     }
 
-    private void AddLineToIndex(Line line, IDictionary<string, IList<int>> index)
+    private void AddLineToIndex(InvertedListLine line, IDictionary<string, IList<int>> index)
     {
         index.Add(line.Key, line.DocIds);
     }
@@ -274,20 +278,14 @@ public class Index
         }
     }
 
-    private Line ParseLine(string lineStr)
+    private InvertedListLine ParseLine(string lineStr)
     {
         var parts = lineStr.Split(':');
 
-        return new Line()
+        return new InvertedListLine()
         {
             Key = parts[0],
             DocIds = parts[1].Split(',').Select(id => int.Parse(id)).ToList()
         };
     }
-}
-
-internal class Line
-{
-    public string Key { get; set; } = string.Empty;
-    public IList<int> DocIds { get; set; } = new List<int>();
 }

@@ -44,7 +44,12 @@ internal class Program
         if (options.Loading == LoadingOption.BuildIndex)
         {
             _watch.Start();
-            index.BuildIndex(documentList, INDEX_PATH);
+            foreach (var document in documentList)
+            {
+                index.AddDocuments(new Document[] { document }, INDEX_PATH);
+            }
+
+            index.BuildIndex(INDEX_PATH);
             _watch.Stop();
             _watch.Print("Creating index");
         } else
