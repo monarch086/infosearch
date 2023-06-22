@@ -10,7 +10,7 @@ public class Index
     private IDictionary<string, IList<int>> _index = new Dictionary<string, IList<int>>();
     private IList<string> _documentNames = new List<string>();
 
-    private const int BLOCK_SIZE = 1000;
+    private const int BLOCK_SIZE = 10000;
     private const int CONCURRENCY_LEVEL = 4;
 
     private int _blockCounter = 0;
@@ -245,7 +245,10 @@ public class Index
 
     private void AddLineToIndex(InvertedListLine line, IDictionary<string, IList<int>> index)
     {
-        index.Add(line.Key, line.DocIds);
+        if (index.ContainsKey(line.Key))
+            index[line.Key] = index[line.Key].Union(line.DocIds).ToList();
+        else
+            index.Add(line.Key, line.DocIds);
     }
 
     private void WriteIndexBlock(IDictionary<string, IList<int>> index, string fileName)

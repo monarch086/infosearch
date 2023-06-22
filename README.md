@@ -181,6 +181,10 @@ cd src\InfoSearch\Executable\InfoSearch.SpimiIndexApp
 # To build new index
 dotnet run -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub -l buildindex
 
+dotnet run -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\book_collection\epub -l buildindex
+
+dotnet run -t pdf -d C:\Users\Oleksandr_Barsuk\Downloads\book_collection\pdf -l buildindex
+
 # To load pre-built index
 dotnet run -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub -l loadindex
 ````
