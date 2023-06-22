@@ -12,11 +12,12 @@ public class PdfParser : IParser
 
     public string Parse(string filename)
     {
-        PdfReader reader = new PdfReader(filename);
         var strings = new StringBuilder();
 
         try
         {
+            var reader = new PdfReader(filename);
+
             for (var pageNum = 1; pageNum <= reader.NumberOfPages; pageNum++)
             {
                 var contentBytes = reader.GetPageContent(pageNum);
@@ -30,12 +31,13 @@ public class PdfParser : IParser
                     }
                 }
             }
+
+            reader.Close();
         }
         catch (Exception e)
         {
-            Console.WriteLine($"ERROR parsing {filename}: {e}.");
+            Console.WriteLine($"Error parsing PDF {filename}: {e}.");
         }
-        finally { reader.Close(); }
 
         return strings.ToString();
     }

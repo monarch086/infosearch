@@ -13,12 +13,20 @@ public class EpubParser : IParser
 
     public string Parse(string filename)
     {
-        EpubBook book = EpubReader.ReadBook(filename);
         StringBuilder sb = new();
 
-        foreach (EpubLocalTextContentFile textContentFile in book.ReadingOrder)
+        try
         {
-            sb.AppendLine(ReadTextContentFile(textContentFile));
+            var book = EpubReader.ReadBook(filename);
+
+            foreach (var textContentFile in book.ReadingOrder)
+            {
+                sb.AppendLine(ReadTextContentFile(textContentFile));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error parsing EPUB {filename}: " + ex.ToString());
         }
 
         return sb.ToString();
