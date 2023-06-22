@@ -139,53 +139,6 @@ public class Index
         });
     }
 
-    private void MergeLinesRecursive(string? lineA, string? lineB, StreamReader readerA, StreamReader readerB, IDictionary<string, IList<int>> index)
-    {
-        if (string.IsNullOrEmpty(lineA) && string.IsNullOrEmpty(lineB))
-            return;
-
-        else if (string.IsNullOrEmpty(lineA))
-        {
-            var parsedLineB = ParseLine(lineB);
-            AddLineToIndex(parsedLineB, index);
-            MergeLinesRecursive(lineA, readerB.ReadLine(), readerA, readerB, index);
-        }
-        else if (string.IsNullOrEmpty(lineB))
-        {
-            var parsedLineA = ParseLine(lineA);
-            AddLineToIndex(parsedLineA, index);
-            MergeLinesRecursive(readerA.ReadLine(), lineB, readerA, readerB, index);
-        }
-        else
-        {
-            var parsedLineA = ParseLine(lineA);
-            var parsedLineB = ParseLine(lineB);
-
-            if (parsedLineA.Key == parsedLineB.Key)
-            {
-                var mergedLine = new InvertedListLine
-                {
-                    Key = parsedLineA.Key,
-                    DocIds = parsedLineA.DocIds.Union(parsedLineB.DocIds).ToList(),
-                };
-                AddLineToIndex(mergedLine, index);
-                MergeLinesRecursive(readerA.ReadLine(), readerB.ReadLine(), readerA, readerB, index);
-            }
-            else
-            {
-                if (parsedLineA.Key.CompareTo(parsedLineB.Key) < 0)
-                {
-                    AddLineToIndex(parsedLineA, index);
-                    MergeLinesRecursive(readerA.ReadLine(), lineB, readerA, readerB, index);
-                }
-                else if (parsedLineA.Key.CompareTo(parsedLineB.Key) > 0)
-                {
-                    MergeLinesRecursive(lineB, lineA, readerB, readerA, index);
-                }
-            }
-        }
-    }
-
     private void MergeLines(StreamReader readerA, StreamReader readerB, IDictionary<string, IList<int>> index)
     {
         var lineA = readerA.ReadLine();
