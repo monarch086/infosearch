@@ -41,9 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucene.Core", "Lucene\Lucen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucene.App", "Lucene\Lucene.App\Lucene.App.csproj", "{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.Core.Spimi", "InfoSearch.Core.Spimi\InfoSearch.Core.Spimi.csproj", "{72EEAE5B-5D2A-4A87-89C9-5DC02075CE0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.Core.Spimi", "InfoSearch.Core.Spimi\InfoSearch.Core.Spimi.csproj", "{72EEAE5B-5D2A-4A87-89C9-5DC02075CE0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.SpimiIndexApp", "Executable\InfoSearch.SpimiIndexApp\InfoSearch.SpimiIndexApp.csproj", "{5798D543-3AFB-4613-BFF9-5C184FE71D23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoSearch.SpimiIndexApp", "Executable\InfoSearch.SpimiIndexApp\InfoSearch.SpimiIndexApp.csproj", "{5798D543-3AFB-4613-BFF9-5C184FE71D23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoSearch.CompressedIndexApp", "Executable\InfoSearch.CompressedIndexApp\InfoSearch.CompressedIndexApp.csproj", "{D04CC4DB-844C-4E3A-86A6-DAC96EA26725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{5798D543-3AFB-4613-BFF9-5C184FE71D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5798D543-3AFB-4613-BFF9-5C184FE71D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5798D543-3AFB-4613-BFF9-5C184FE71D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D04CC4DB-844C-4E3A-86A6-DAC96EA26725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D04CC4DB-844C-4E3A-86A6-DAC96EA26725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D04CC4DB-844C-4E3A-86A6-DAC96EA26725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D04CC4DB-844C-4E3A-86A6-DAC96EA26725}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +146,7 @@ Global
 		{7770F1D3-F430-4AED-BA5D-A7FD58DE4F97} = {313F554C-EE83-42C6-B645-4207C4A52EB5}
 		{7C2B263C-D3F4-4A5E-A28C-6E5013FF4754} = {313F554C-EE83-42C6-B645-4207C4A52EB5}
 		{5798D543-3AFB-4613-BFF9-5C184FE71D23} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
+		{D04CC4DB-844C-4E3A-86A6-DAC96EA26725} = {D6CAD63A-F61D-4701-B62E-8155C6EE94AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C432D75-7910-43B2-AE21-B47C0C1B8B9C}
