@@ -188,3 +188,14 @@ dotnet run -t pdf -d C:\Users\Oleksandr_Barsuk\Downloads\book_collection\pdf -l 
 # To load pre-built index
 dotnet run -t epub -d C:\Users\Oleksandr_Barsuk\Downloads\epub -l loadindex
 ````
+
+## InfoSearch compressed index
+
+````sh
+cd src\InfoSearch\Executable\InfoSearch.CompressedIndexApp
+dotnet run
+````
+
+Query examples:
+
+`pictur of dorian`

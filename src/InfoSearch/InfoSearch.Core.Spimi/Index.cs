@@ -118,6 +118,12 @@ public class Index
         return documentIds.Select(e => _documentNames[e]).ToArray();
     }
 
+    public IEnumerable<string> Terms => _index.Keys;
+
+    public IList<int> GetPostings(string term) => _index[term];
+
+    public IList<string> DocumentNames => _documentNames;
+
     private Task<string> MergeIndexBlocks(string blockA, string blockB, string fileName)
     {
         return Task<string>.Factory.StartNew(() =>
