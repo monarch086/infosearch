@@ -1,6 +1,7 @@
 ﻿using InfoSearch.ConsoleUtils;
 using InfoSearch.Core;
 using InfoSearch.Core.Extensions;
+using System.Collections;
 using static InfoSearch.ConsoleUtils.Constants;
 
 namespace InfoSearch.CompressedIndexApp;
@@ -12,7 +13,7 @@ internal class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("InfoSearch SPIMI Index");
+        Console.WriteLine("InfoSearch Compressed Index");
 
         var index = new Core.Spimi.Index();
 
@@ -29,6 +30,44 @@ internal class Program
         _watch.Print("Loading index");
 
         var compressedIndex = new Core.Spimi.IndexCompressed(index);
+
+        //
+        var code = compressedIndex.CompressPosting(5);
+        BitArray bitArray = new BitArray(code);
+        compressedIndex.PrintValues(bitArray, 8);
+
+        var ids = compressedIndex.DecompressPostings(code);
+        Console.WriteLine($"Decompressed ids for 5: {string.Join(", ", ids)}.");
+        //
+        var codes = new List<byte>();
+        codes.AddRange(code);
+        codes.AddRange(code);
+        ids = compressedIndex.DecompressPostings(codes.ToArray());
+        Console.WriteLine($"Decompressed ids for 5,5: {string.Join(", ", ids)}.");
+        //
+        code = compressedIndex.CompressPosting(500);
+        bitArray = new BitArray(code);
+        compressedIndex.PrintValues(bitArray, 8);
+
+        ids = compressedIndex.DecompressPostings(code);
+        Console.WriteLine($"Decompressed ids for 500: {string.Join(", ", ids)}.");
+        //
+        code = compressedIndex.CompressPosting(15000);
+        bitArray = new BitArray(code);
+        compressedIndex.PrintValues(bitArray, 8);
+
+        ids = compressedIndex.DecompressPostings(code);
+        Console.WriteLine($"Decompressed ids for 15000: {string.Join(", ", ids)}.");
+        //
+        codes = new List<byte>();
+        codes.AddRange(compressedIndex.CompressPosting(855));
+        codes.AddRange(compressedIndex.CompressPosting(825));
+        codes.AddRange(compressedIndex.CompressPosting(661));
+        codes.AddRange(compressedIndex.CompressPosting(593));
+        codes.AddRange(compressedIndex.CompressPosting(567));
+        ids = compressedIndex.DecompressPostings(codes.ToArray());
+        Console.WriteLine($"Decompressed ids for 855,825,661,593,567: {string.Join(", ", ids)}.");
+        //
 
         Console.WriteLine("Please enter your query:");
         string queryString = Console.ReadLine() ?? string.Empty;
