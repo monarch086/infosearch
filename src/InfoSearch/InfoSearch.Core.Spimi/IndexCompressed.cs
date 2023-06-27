@@ -18,7 +18,7 @@ public class IndexCompressed
         {
             _index.Add(pointer, Array.Empty<byte>());
             sb.Append(term);
-            AddPostings(pointer, index.GetPostings(term).ToHashSet());
+            AddPostings(pointer, index.GetPostings(term));
 
             pointer += term.Length;
         }
@@ -42,7 +42,7 @@ public class IndexCompressed
         _terms = sb.ToString();
     }
 
-    private void AddPostings(int pointer, ISet<int> postings)
+    private void AddPostings(int pointer, IEnumerable<int> postings)
     {
         var variableByteCodes = new List<byte>();
 
@@ -51,7 +51,7 @@ public class IndexCompressed
         foreach (var posting in postings)
         {
             var difference = posting - previousValue;
-            var vbCode = CalculateVbCode(difference);
+            var vbCode = CompressPosting(difference);
             variableByteCodes.AddRange(vbCode);
             previousValue = posting;
         }
@@ -59,31 +59,22 @@ public class IndexCompressed
         _index[pointer] = variableByteCodes.ToArray();
     }
 
-    private byte[] CalculateVbCode(int value)
+    public byte[] CompressPosting(int value)
     {
-        var bytes = new List<byte>();
+        var bitArray = new BitArray(BitConverter.GetBytes(value));
 
-        while (value > 0)
+        var latestSetBit = bitArray.GetLastSetBit();
+
+        for (int i = 0; i < bitArray.Length; i++)
         {
-            value = value << 1;
-
-            var bytePart = value % 128;
-            var shifted = bytePart >> 1;
-
-            if (value / 128 != 0) shifted |= 128;
-            else shifted &= 127;
-
-            bytes.AddRange(BitConverter.GetBytes(shifted));
-
-            value /= 128;
+            var isByteSet = i - latestSetBit < 0;
+            if (i.IsLastBitInByte() && isByteSet) bitArray.InsertBit(i);
         }
 
-        bytes.Reverse();
-
-        return bytes.Where(x => x != 0).ToArray();
+        return bitArray.Trim().ToBytes();
     }
 
-    private IList<int> DecompressPostings(byte[] vbCodes)
+    public IList<int> DecompressPostings(byte[] vbCodes)
     {
         var postings = new List<int>();
         var currentPostingBytes = new List<byte>();
@@ -93,18 +84,9 @@ public class IndexCompressed
             if (bytePart < 128)
             {
                 currentPostingBytes.Add(bytePart);
-                //var shiftedNumber = BitConverter.ToInt32(currentPostingBytes.ToArray());
-                var shiftedNumber = bytePart;
-                var posting = 0;
-
-                while (shiftedNumber > 0)
-                {
-                    posting = posting << 1;
-                    posting += shiftedNumber % 128;
-                    posting = posting >> 1;
-                    shiftedNumber /= 128;
-                }
-
+                var bitArray = new BitArray(currentPostingBytes.ToArray());
+                var normalized = bitArray.RemoveVariableBits();
+                var posting = normalized.ToInt();
                 postings.Add(posting);
                 currentPostingBytes.Clear();
             }
@@ -112,6 +94,15 @@ public class IndexCompressed
             {
                 currentPostingBytes.Add(bytePart);
             }
+        }
+
+        if (currentPostingBytes.Any())
+        {
+            var bitArray = new BitArray(currentPostingBytes.ToArray());
+            var normalized = bitArray.RemoveVariableBits();
+            var posting = normalized.ToInt();
+            postings.Add(posting);
+            currentPostingBytes.Clear();
         }
 
         return postings;
@@ -126,7 +117,8 @@ public class IndexCompressed
         }
 
         var vbCodes = _index.ContainsKey(termPointer) ? _index[termPointer] : Array.Empty<byte>();
-        PrintValues(vbCodes, 8);
+
+        BitArray bits = new BitArray(vbCodes);
 
         var documentIds = DecompressPostings(vbCodes);
         Console.WriteLine($"DocIds: {string.Join(", ", documentIds)}");
@@ -134,7 +126,7 @@ public class IndexCompressed
         return documentIds.Select(e => _documentNames[e]).ToArray();
     }
 
-    public static void PrintValues(IEnumerable myList, int myWidth)
+    public void PrintValues(IEnumerable myList, int myWidth)
     {
         int i = myWidth;
         foreach (var obj in myList)
@@ -145,7 +137,8 @@ public class IndexCompressed
                 Console.WriteLine();
             }
             i--;
-            Console.Write("{0,8}", obj);
+            var val = (bool)obj == true ? 1 : 0;
+            Console.Write("{0,8}", val);
         }
         Console.WriteLine();
     }
@@ -163,7 +156,7 @@ public class IndexCompressed
 
         while (currentTerm != term)
         {
-            Console.WriteLine(currentTerm);
+           // Console.WriteLine(currentTerm);
 
             if (currentTerm.CompareTo(term) < 0)
             {
